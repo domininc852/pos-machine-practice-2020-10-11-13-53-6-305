@@ -14,12 +14,12 @@ public class PosMachine {
             ProductInfo itemInformation=retrieveItemDetail(barcode);
             boolean exist=false;
             for (ProductInfo item:itemsInformation){
-                if (item.getBarcode()==itemInformation.getBarcode()){
+                if (item.getBarcode().equals(itemInformation.getBarcode())){
                     exist=true;
                     break;
                 }
             }
-            if (exist==false)
+            if (!exist)
                 itemsInformation.add(itemInformation);
 
         }
@@ -28,7 +28,7 @@ public class PosMachine {
     private ProductInfo retrieveItemDetail(String barcode){
         List<ItemInfo> itemInfos=ItemDataLoader.loadAllItemInfos();
         for (int i=0;i<itemInfos.size();i++){
-            if (itemInfos.get(i).getBarcode()==barcode){
+            if (itemInfos.get(i).getBarcode().equals(barcode)){
                 return new ProductInfo(itemInfos.get(i).getBarcode(),itemInfos.get(i).getName(),itemInfos.get(i).getPrice(),0,0);
             }
         }
@@ -47,7 +47,7 @@ public class PosMachine {
     private ArrayList<ProductInfo> findQuantityOfEachItem(List<String> barcodes, ArrayList<ProductInfo>itemsInformation){
         for (int i=0;i<barcodes.size();i++){
             for (int j=0;j<itemsInformation.size();j++){
-                if (barcodes.get(i)==itemsInformation.get(j).getBarcode()){
+                if (barcodes.get(i).equals(itemsInformation.get(j).getBarcode())){
                     itemsInformation.get(j).setQuantity(itemsInformation.get(j).getQuantity()+1);
                 }
             }
